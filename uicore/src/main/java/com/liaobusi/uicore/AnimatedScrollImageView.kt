@@ -37,21 +37,21 @@ class AnimatedScrollImageView @kotlin.jvm.JvmOverloads constructor(
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        val mDrawableWidth = drawable?.intrinsicWidth?.toFloat() ?: 0f
-        val mDrawableHeight = drawable?.intrinsicHeight?.toFloat() ?: 0f
-        if (mDrawableHeight == 0f || mDrawableWidth == 0f) {
+        val drawableWidth = drawable?.intrinsicWidth?.toFloat() ?: 0f
+        val drawableHeight = drawable?.intrinsicHeight?.toFloat() ?: 0f
+        if (drawableHeight == 0f || drawableWidth == 0f) {
             return
         }
 
         val vwidth = w - paddingLeft - paddingRight
         val vheight = h - paddingTop - paddingBottom
-        val scale = if (mDrawableWidth <= vwidth && mDrawableHeight <= vheight) {
+        val scale = if (drawableWidth <= vwidth && drawableHeight <= vheight) {
             1.0f
         } else {
-            max(vwidth.toFloat() / mDrawableWidth, vheight.toFloat() / mDrawableHeight)
+            max(vwidth.toFloat() / drawableWidth, vheight.toFloat() / drawableHeight)
         }
-        val horizontalScrollRange = (mDrawableWidth * scale - vwidth)
-        val verticalScrollRange = (mDrawableHeight * scale - vheight)
+        val horizontalScrollRange = (drawableWidth * scale - vwidth)
+        val verticalScrollRange = (drawableHeight * scale - vheight)
         val startPoint = PointF(0f, 0f)
         val endPoint = PointF(-horizontalScrollRange, -verticalScrollRange)
         mAnimator?.cancel()
