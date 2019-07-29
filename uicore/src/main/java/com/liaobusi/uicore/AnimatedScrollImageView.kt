@@ -10,13 +10,14 @@ import android.graphics.PointF
 import android.util.AttributeSet
 
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import com.liaobusi.uicore.utils.PointFEvaluator
 import kotlin.math.max
 
 
 class AnimatedScrollImageView @kotlin.jvm.JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ImageView(context, attrs, defStyleAttr) {
+) : AppCompatImageView(context, attrs, defStyleAttr) {
 
 
     var animateDuration: Long = 10000
