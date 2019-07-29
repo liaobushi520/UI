@@ -18,13 +18,14 @@ class AnimatedScrollImageView @kotlin.jvm.JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ImageView(context, attrs, defStyleAttr) {
 
-    var autoAnimate = true
 
     var animateDuration: Long = 10000
 
     private var mAnimator: Animator? = null
 
     private val pointEvaluator = PointFEvaluator()
+
+    private val reuseMatrix = Matrix()
 
     init {
         super.setScaleType(ScaleType.MATRIX)
@@ -61,15 +62,14 @@ class AnimatedScrollImageView @kotlin.jvm.JvmOverloads constructor(
             repeatCount = ValueAnimator.INFINITE
             addUpdateListener {
                 val value = it.animatedValue as PointF
-                val newMatrix = Matrix()
-                newMatrix.setScale(scale, scale)
-                newMatrix.postTranslate(value.x, value.y)
-                imageMatrix = newMatrix
+                reuseMatrix.reset()
+                reuseMatrix.setScale(scale, scale)
+                reuseMatrix.postTranslate(value.x, value.y)
+                imageMatrix = reuseMatrix
             }
+            start()
         }
-        if (autoAnimate) {
-            mAnimator?.start()
-        }
+
     }
 
     override fun onDetachedFromWindow() {

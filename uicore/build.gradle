@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.novoda.bintray-release'
+
+def version="1.0.0"
 
 android {
     compileSdkVersion 28
@@ -23,6 +26,16 @@ android {
         }
     }
 
+}
+
+publish {
+    userOrg = "liaozhongjun40"
+    groupId = 'com.liaobusi'
+    repoName = "uicore"
+    artifactId = "uicore"
+    publishVersion = "${version}"
+    desc = 'some awseful android widgets.'
+    website = 'https://github.com/liaobushi520/uicore'
 }
 
 dependencies {
